@@ -2,13 +2,15 @@ import pygame
 from constants import *
 from circleshape import CircleShape
 from shot import Shot
-
+from asteroidfield import AsteroidField
+from asteroid import Asteroid
 
 class Player(CircleShape):
 	def __init__(self, x, y):
 		super().__init__(x, y, PLAYER_RADIUS)
 		self.rotation = 0
 		self.shoot_timer = 0
+		self.score = 0
 
 	def triangle(self):
 		forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -56,4 +58,13 @@ class Player(CircleShape):
 		shot = Shot(self.position.x, self.position.y)
 		shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
 
+	def current_score(self, asteroid):
+		if asteroid.radius >= 50:
+			self.score += 20
+		elif asteroid.radius >= 30:
+			self.score += 40
+		else:
+			self.score += 80
 
+	def get_score(self):
+		return self.score

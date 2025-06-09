@@ -9,8 +9,6 @@ from shot import Shot
 
 def main():
 	pygame.init
-	pygame.font.init()
-
 	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 	clock = pygame.time.Clock()
 
@@ -28,8 +26,6 @@ def main():
 	player = Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2)
 
 
-	score_font = pygame.font.Font("/home/kai/workspace/github.com/hermanvadym/asteroid/cour.ttf", 32)
-
 
 	print("Starting Asteroids!")
 	print(f"Screen width: {SCREEN_WIDTH}")
@@ -46,19 +42,17 @@ def main():
 
 		for asteroid in asteroids:
 			if asteroid.collides_with(player):
-				print(f"{player.get_score()}")
+				print(f"{score_count}")
 				print("Game over!")
 				sys.exit()
 
 			for shot in shots:
 				if asteroid.collides_with(shot):
-					player.current_score(asteroid)
+					self.score_count()
 					shot.kill()
 					asteroid.split()
 
-		text_surface = score_font.render(f"{player.get_score()}", False, (255, 255, 255))
 		screen.fill("black")
-		screen.blit(text_surface, (40,30))
 
 		for obj in drawable:
 			obj.draw(screen)
