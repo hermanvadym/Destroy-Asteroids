@@ -2,6 +2,7 @@ import pygame
 import random
 from asteroid import Asteroid
 from constants import *
+from circleshape import CircleShape
 
 
 class AsteroidField(pygame.sprite.Sprite):
